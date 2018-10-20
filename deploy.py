@@ -19,7 +19,7 @@ def new_ask():
     return question(welcome) \
         .simple_card(title='Launch page', content='Make your time')
 
-@ask.intro
+@ask.intent('intro')
 def introduction(name):
     dummy_string = "Hi " + name + ". Its good to see you."
     return question(dummy_string) \
