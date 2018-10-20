@@ -19,6 +19,12 @@ def new_ask():
     return question(welcome) \
         .reprompt(reprompt)
 
+@ask.intro
+def introduction(name):
+    dummy_string = "Hi " + name + ". Its good to see you."
+    return question(dummy_string)
+
+
 
 # --------------------------------------------------------------------------------------------
 # MAIN
