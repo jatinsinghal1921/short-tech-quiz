@@ -17,12 +17,13 @@ def new_ask():
     welcome = render_template('welcome')
     reprompt = render_template('reprompt')
     return question(welcome) \
-        .reprompt(reprompt)
+        .simple_card(title='Launch page', content='Make your time')
 
 @ask.intro
 def introduction(name):
     dummy_string = "Hi " + name + ". Its good to see you."
-    return question(dummy_string)
+    return question(dummy_string) \
+        .simple_card(title='CATS says...', content='Make your time')
 
 
 
