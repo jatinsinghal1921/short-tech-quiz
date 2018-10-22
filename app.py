@@ -11,12 +11,6 @@ ask = Ask(app, "/alexa")
 
 email_dict = {}
 
-sender_id = ""
-password = ""
-receiver_id = ""
-email_subject = ""
-email_body = ""
-
 
 @ask.launch
 def new_ask():
