@@ -17,9 +17,9 @@ def new_ask():
 
 
 @ask.intent('personalDetails')
-def personal_details():
-	print("in personal details section")
-	return question("you are in personal details module")
+def personal_details(first_name):
+	print("hello" + first_name + "in personal details section")
+	return question(first_name + ",you are in personal details module")
 
 
 @app.route("/", methods=["GET", "POST"])
