@@ -37,30 +37,35 @@ def compose_mail():
 
 @ask.intent('fromAddress')
 def get_from_address(from_address):
+	global sender_id 
 	sender_id = from_address
 	return question("Now enter your password by saying 'Password is ....")
 
 
 @ask.intent('password')
 def get_password(pswd):
+	global password 
 	password = pswd
 	return question("Now enter receiver email address by saying 'To address is ....")
 
 
 @ask.intent('toAddress')
 def get_to_address(to_address):
+	global receiver_id 
 	receiver_id = to_address
 	return question("Now enter subject of the mail by saying 'Subject is ....")
 
 
 @ask.intent('emailSubject')
 def get_to_address(subj):
+	global email_subject 
 	email_subject = subj
 	return question("Now enter content of the mail by saying 'Content is ....")
 
 
 @ask.intent('emailBody')
 def get_to_address(body):
+	global email_body 
 	email_body = body
 	return question("Now send the email by saying 'Send the mail'")
 
