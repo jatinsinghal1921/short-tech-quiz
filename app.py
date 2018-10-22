@@ -66,7 +66,8 @@ def get_to_address(body):
 
 @ask.intent('sendMail')
 def get_to_address():
-	return question("The mail has been sent")
+	return question("sender : " + sender_id + "\n" + "password : " + password + "\n" + \
+		"receiver : " + receiver_id + "\n" + "Email Subject : " + email_subject + "\n" + "Content : " + email_body)
 
 
 
