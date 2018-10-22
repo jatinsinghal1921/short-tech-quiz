@@ -16,6 +16,12 @@ def new_ask():
     return question("Hi Jatin")
 
 
+@ask.intent('personalDetails')
+def personal_details():
+	print("in personal details section")
+	return ("you are in personal details module")
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
 	return "Hello World"
