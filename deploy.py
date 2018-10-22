@@ -24,7 +24,9 @@ def introduction(name):
     return question(dummy_string) \
         .simple_card(title=' Intro page...', content='Make your time')
 
-
+@app.route("/", methods=["GET", "POST"])
+def index():
+	return "Hello World"
 
 # --------------------------------------------------------------------------------------------
 # MAIN
