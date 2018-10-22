@@ -9,6 +9,8 @@ import requests
 app = Flask(__name__)
 ask = Ask(app, "/alexa")
 
+email_dict = {}
+
 sender_id = ""
 password = ""
 receiver_id = ""
@@ -36,45 +38,43 @@ def compose_mail():
 
 
 @ask.intent('fromAddress')
-def get_from_address(from_address):
-	global sender_id 
-	sender_id = from_address
+def get_from_address(from_address): 
+	email_dict['sender_id'] = from_address
 	return question("Now enter your password by saying 'Password is ....")
 
 
 @ask.intent('password')
 def get_password(pswd):
-	global password 
-	password = pswd
+	email_dict['password'] = pswd
 	return question("Now enter receiver email address by saying 'To address is ....")
 
 
 @ask.intent('toAddress')
-def get_to_address(to_address):
-	global receiver_id 
-	receiver_id = to_address
+def get_to_address(to_address): 
+	email_dict['receiver_id'] = to_address
 	return question("Now enter subject of the mail by saying 'Subject is ....")
 
 
 @ask.intent('emailSubject')
 def get_to_address(subj):
-	global email_subject 
-	email_subject = subj
+	email_dict['email_subject'] = subj
 	return question("Now enter content of the mail by saying 'Content is ....")
 
 
 @ask.intent('emailBody')
-def get_to_address(body):
-	global email_body 
-	email_body = body
+def get_to_address(body): 
+	email_dict['email_body'] = body
 	return question("Now send the email by saying 'Send the mail'")
 
 @ask.intent('sendMail')
 def get_to_address():
-	print("sender : " + sender_id + "\n" + "password : " + password + "\n" + \
-		"receiver : " + receiver_id + "\n" + "Email Subject : " + email_subject + "\n" + "Content : " + email_body)
-	return question("sender : " + sender_id + "\n" + "password : " + password + "\n" + \
-		"receiver : " + receiver_id + "\n" + "Email Subject : " + email_subject + "\n" + "Content : " + email_body)
+	if len(email_dict) < 5:
+		return question("Please enter all the details, before we can send the mail.")
+
+	print("sender : " + email_dict['sender_id'] + "\n" + "password : " + email_dict['password'] + "\n" + \
+		"receiver : " + email_dict['receiver_id'] + "\n" + "Email Subject : " + email_dict['email_subject'] + "\n" + "Content : " + email_dict['email_body'])
+	return question("sender : " + email_dict['sender_id'] + "\n" + "password : " + email_dict['password'] + "\n" + \
+		"receiver : " + email_dict['receiver_id'] + "\n" + "Email Subject : " + email_dict['email_subject'] + "\n" + "Content : " + email_dict['email_body'])
 
 
 
