@@ -14,6 +14,7 @@ def new_ask():
     # welcome = render_template('welcome')
     # return question(welcome) \
     #     .simple_card(title='Launch page', content='Make your time')
+    print("Launch invoked")
     return question("Hi Jatin")
 
 @ask.intent('intro')
