@@ -2,9 +2,6 @@ from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 from datetime import datetime
 import requests
-import urllib
-import re
-import random
 
 # --------------------------------------------------------------------------------------------
 # INITIALISATION
