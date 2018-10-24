@@ -61,6 +61,11 @@ def display_answer(user_answer):
 	return question("Correct Answer is Option " + correct_answer)
 
 
+@ask.intent("terminate")
+def terminate_quiz():
+	return statement("See You Later")
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
 	print(questions_list[0]["Question"])
