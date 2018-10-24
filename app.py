@@ -40,11 +40,12 @@ def display_question():
 
 	global query
 	global option_str
-	global answer
+	global correct_answer
 
 	query = questions_list_item["Question"]
 	options = questions_list_item["Options"]
-	option_str = options[0] + "\n\n" + options[1] + "\n\n" +options[2] + "\n\n" +options[3]
+	#option_str = options[0] + "\n\n" + options[1] + "\n\n" +options[2] + "\n\n" +options[3]
+	option_str = options[0] + options[1] + options[2] + options[3]
 	correct_answer = questions_list_item["Answers"]
 	
 	return question(query + "\n\n" + option_str)
@@ -54,7 +55,7 @@ def display_question():
 def display_answer(user_answer):
 	global correct_answer
 
-	if user_answer == correct_answer:
+	if user_answer.upper() == correct_answer.upper():
 		return question("Your answer is right.")
 
 	return question("Correct Answer is Option " + correct_answer)
