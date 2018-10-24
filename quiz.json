@@ -1,0 +1,27 @@
+[
+	{
+		"Question" : "In which decade was the American Institute of Electrical Engineers (AIEE) founded?",
+		"Options" : ["1850s","1880s","1930s","1950s"],
+		"Answers" : "B"
+	},
+	{
+		"Question" : "What is part of a database that holds only one type of information?",
+		"Options" : ["Report","Field","Record","File"],
+		"Answers" : "B"
+	},
+	{
+		"Question" : "'OS' computer abbreviation usually means ?",
+		"Options" : ["Order of Significance","Open Software","Operating System","Optical Sensor"],
+		"Answers" : "C"
+	},
+	{
+		"Question" : "InIn which decade with the first transatlantic radio broadcast occur?",
+		"Options" : ["1850s","1860s","1870s","1900s"],
+		"Answers" : "D"
+	},
+	{
+		"Question" : "'.MOV' extension refers usually to what kind of file?",
+		"Options" : ["Image file","Animation/movie file","Audio file","MS Office document"],
+		"Answers" : "C"
+	}			
+]
