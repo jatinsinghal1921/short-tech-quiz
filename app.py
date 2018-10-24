@@ -44,8 +44,7 @@ def display_question():
 
 	query = questions_list_item["Question"]
 	options = questions_list_item["Options"]
-	#option_str = options[0] + "\n\n" + options[1] + "\n\n" +options[2] + "\n\n" +options[3]
-	option_str = options[0] + options[1] + options[2] + options[3]
+	option_str = options[0] + "\n\n" + options[1] + "\n\n" +options[2] + "\n\n" +options[3]
 	correct_answer = questions_list_item["Answers"]
 	
 	return question(query + "\n\n" + option_str)
@@ -58,6 +57,7 @@ def display_answer(user_answer):
 	if user_answer.upper() == correct_answer.upper():
 		return question("Your answer is right.")
 
+	print("Correct Answer is Option " + correct_answer)	
 	return question("Correct Answer is Option " + correct_answer)
 
 
