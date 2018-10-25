@@ -1,11 +1,11 @@
-test_dict = {}
+a = ""
 
 def change():
-	test_dict["a"] = 1
+	a = "Hello"
 
 
 def print_q():
-	print(test_dict)
+	print(a)
 
 change()
 print_q()

@@ -38,6 +38,10 @@ def personal_details(first_name):
 
 @ask.intent("question_intent")
 def display_question():
+
+	global answer
+	answer = ""
+
 	random.shuffle(questions_list)
 	questions_list_item = questions_list[0]
 	print(questions_list_item)
