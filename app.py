@@ -58,6 +58,8 @@ def display_question():
 @ask.intent("answer_intent")
 def display_answer(user_answer):
 	print(type(user_answer))
+	print("user ans : " + user_answer.upper())
+	print("correct ans : " + query_dict["correct_answer"].upper())
 	if user_answer.upper() == query_dict["correct_answer"].upper():
 		return question("Your answer is right.")
 	else:
