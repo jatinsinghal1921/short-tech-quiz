@@ -48,6 +48,9 @@ def display_question():
 	print(query_dict["correct_answer"])
 	storing_global_var(query_dict["correct_answer"])
 
+	global answer
+	print(answer)
+
 	return question(query_dict["query"] + "\n\n" + query_dict["option_str"])
 
 
@@ -62,12 +65,16 @@ def storing_global_var(params_answer):
 
 @ask.intent("answer_intent")
 def display_answer(user_answer):
-	print(type(user_answer))
-	print("user ans : " + user_answer.upper())
 
-	empty_str = ""
-	stored_ans = storing_global_var(empty_str)
-	print("correct ans : " + stored_ans.upper())
+	global answer
+	print(answer)
+
+	# print(type(user_answer))
+	# print("user ans : " + user_answer.upper())
+
+	# empty_str = ""
+	# stored_ans = storing_global_var(empty_str)
+	# print("correct ans : " + stored_ans.upper())
 	
 	if user_answer.upper() == answer.upper():
 		print(answer.upper())
