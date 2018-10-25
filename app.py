@@ -15,72 +15,51 @@ ask = Ask(app, "/alexa")
 quizFile = open("quiz.json","r")
 questions_list = json.load(quizFile)
 
-query_dict = dict()
-query_dict["query"] = ""
-query_dict["correct_answer"] = ""
-query_dict["option_str"] = ""
-
-answer = ""
 
 @ask.launch
 def new_ask():
     print("Launch invoked")
-    welcome = "Welcome to the quiz Show. \n\n Say 'Lets Begin' to start the quiz. and \n\n Goodbye to terminate the quiz."
+    welcome = "Welcome to the quiz Show.\n\nThere are totally 5 questions.\n\nSay 'Go to Question Qno.' to start the quiz. and \n\n Goodbye to terminate the quiz."
     return question(welcome)
 
 
 @ask.intent("question_intent")
-def display_question():
+def display_question(qno):
+	qno = int(qno)
 
-	random.shuffle(questions_list)
-	questions_list_item = questions_list[0]
+	if qno > len(questions_list):
+		return question("There are only 5 questions. So select from 1 to 5.")
+
+	questions_list_item = questions_list[qno]
 	print(questions_list_item)
 
-	query_dict["query"] = questions_list_item["Question"]
-	print(query_dict["query"])
+	query = questions_list_item["Question"]
+	print(query)
 
 	options = questions_list_item["Options"]
-	query_dict["option_str"] = options[0] + "\n\n" + options[1] + "\n\n" +options[2] + "\n\n" +options[3]
-	print(query_dict["option_str"])
+	option_str = options[0] + "\n\n" + options[1] + "\n\n" +options[2] + "\n\n" +options[3]
+	print(option_str)
 
-	query_dict["correct_answer"] = questions_list_item["Answers"]
-	
-	print(query_dict["correct_answer"])
-	storing_global_var(query_dict["correct_answer"])
+	print("Storing Question no in txt file")
+	qno_file = open("qno.txt","w")
+	qno_file.write("Question No:" + str(qno))
+	qno_file.close()
 
-	global answer
-	print("Global var in question intent : " + answer)
-
-	return question(query_dict["query"] + "\n\n" + query_dict["option_str"])
-
-
-def storing_global_var(params_answer):
-	global answer
-	if params_answer == "":
-		return answer
-
-	answer = params_answer
-	return answer
+	return question(query + "\n\n" + option_str)
 
 
 @ask.intent("answer_intent")
 def display_answer(user_answer):
+	print("Reading from qno file.")
+	qno_file = open("qno.txt","r")
+	qno = qno_file.read()
 
-	global answer
-	print("Global var in answer intent : " + answer)
-
-	# print(type(user_answer))
-	# print("user ans : " + user_answer.upper())
-
-	# empty_str = ""
-	# stored_ans = storing_global_var(empty_str)
-	# print("correct ans : " + stored_ans.upper())
-	
-	if user_answer.upper() == answer.upper():
-		print(answer.upper())
+	qno = int(qno)
+	correct_answer = questions_list[qno]["Answers"]
+	if user_answer.upper() == correct_answer.upper():
 		return question("Your answer is right.")
 	else:
-		return question("you answered " + user_answer.upper() +" ....Correct answer is  " + query_dict["correct_answer"].upper())
+		return question("you answered " + user_answer.upper() +" ....Correct answer is  " + correct_answer.upper())
 
 
 @ask.intent("terminate")
@@ -97,4 +76,4 @@ def index():
 # MAIN
 
 if __name__ == '__main__':
-	app.run(debug=True, host="0.0.0.0")
+	app.run(debug=True, host="0.0.0.0",threaded=True)
