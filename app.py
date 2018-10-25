@@ -39,11 +39,17 @@ def personal_details(first_name):
 def display_question():
 	random.shuffle(questions_list)
 	questions_list_item = questions_list[0]
+	print(questions_list_item)
 
 	query_dict["query"] = questions_list_item["Question"]
+	print(query_dict["query"])
+
 	options = questions_list_item["Options"]
 	query_dict["option_str"] = options[0] + "\n\n" + options[1] + "\n\n" +options[2] + "\n\n" +options[3]
+	print(query_dict["option_str"])
+
 	query_dict["correct_answer"] = questions_list_item["Answers"]
+	print(query_dict["correct_answer"])
 
 	print("In question_intent, Correct answer is " + query_dict["correct_answer"])
 	return question(query_dict["query"] + "\n\n" + query_dict["option_str"])
