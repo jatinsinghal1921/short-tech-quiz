@@ -68,7 +68,6 @@ def display_answer(user_answer):
 	print(type(user_answer))
 	print("user ans : " + user_answer.upper())
 
-	global answer
 	print("correct ans : " + answer.upper())
 	if user_answer.upper() == answer.upper():
 		return question("Your answer is right.")
