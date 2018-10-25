@@ -61,7 +61,7 @@ def display_answer(user_answer):
 	if user_answer.upper() == query_dict["correct_answer"].upper():
 		return question("Your answer is right.")
 	else:
-		return question("you answered " + user_answer.upper() +" ....Correct answer is + " query_dict["correct_answer"].upper())
+		return question("you answered " + user_answer.upper() +" ....Correct answer is  " + query_dict["correct_answer"].upper())
 
 
 @ask.intent("terminate")
