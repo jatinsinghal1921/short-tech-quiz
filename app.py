@@ -29,18 +29,8 @@ def new_ask():
     return question(welcome)
 
 
-@ask.intent('personalDetails')
-def personal_details(first_name):
-	print("hello" + first_name + "in personal details section")
-	welcome = render_template('welcome')
-	return question(welcome)
-
-
 @ask.intent("question_intent")
 def display_question():
-
-	global answer
-	answer = ""
 
 	random.shuffle(questions_list)
 	questions_list_item = questions_list[0]
@@ -55,12 +45,19 @@ def display_question():
 
 	query_dict["correct_answer"] = questions_list_item["Answers"]
 	
-	answer = questions_list_item["Answers"]
-	
 	print(query_dict["correct_answer"])
+	storing_global_var(query_dict["correct_answer"])
 
-	print("In question_intent, Correct answer is " + query_dict["correct_answer"])
 	return question(query_dict["query"] + "\n\n" + query_dict["option_str"])
+
+
+def storing_global_var(params_answer):
+	global answer
+	if params_answer == "":
+		return answer
+
+	answer = params_answer
+	return answer
 
 
 @ask.intent("answer_intent")
@@ -68,8 +65,12 @@ def display_answer(user_answer):
 	print(type(user_answer))
 	print("user ans : " + user_answer.upper())
 
-	print("correct ans : " + answer.upper())
+	empty_str = ""
+	stored_ans = storing_global_var(empty_str)
+	print("correct ans : " + stored_ans.upper())
+	
 	if user_answer.upper() == answer.upper():
+		print(answer.upper())
 		return question("Your answer is right.")
 	else:
 		return question("you answered " + user_answer.upper() +" ....Correct answer is  " + query_dict["correct_answer"].upper())

@@ -1,6 +1,7 @@
 a = ""
 
 def change():
+	global a
 	a = "Hello"
 
 
