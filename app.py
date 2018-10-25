@@ -55,7 +55,6 @@ def display_question():
 
 	query_dict["correct_answer"] = questions_list_item["Answers"]
 	
-	global answer
 	answer = questions_list_item["Answers"]
 	
 	print(query_dict["correct_answer"])
