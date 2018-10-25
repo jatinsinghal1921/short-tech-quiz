@@ -42,7 +42,7 @@ def display_question(qno):
 
 	print("Storing Question no in txt file")
 	qno_file = open("qno.txt","w")
-	qno_file.write("Question No:" + str(qno))
+	qno_file.write(str(qno))
 	qno_file.close()
 
 	return question(query + "\n\n" + option_str)
