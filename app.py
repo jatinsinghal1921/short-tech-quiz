@@ -20,6 +20,7 @@ query_dict["query"] = ""
 query_dict["correct_answer"] = ""
 query_dict["option_str"] = ""
 
+answer = ""
 
 @ask.launch
 def new_ask():
@@ -49,6 +50,10 @@ def display_question():
 	print(query_dict["option_str"])
 
 	query_dict["correct_answer"] = questions_list_item["Answers"]
+	
+	global answer
+	answer = questions_list_item["Answers"]
+	
 	print(query_dict["correct_answer"])
 
 	print("In question_intent, Correct answer is " + query_dict["correct_answer"])
@@ -59,8 +64,10 @@ def display_question():
 def display_answer(user_answer):
 	print(type(user_answer))
 	print("user ans : " + user_answer.upper())
-	print("correct ans : " + query_dict["correct_answer"].upper())
-	if user_answer.upper() == query_dict["correct_answer"].upper():
+
+	global answer
+	print("correct ans : " + answer.upper())
+	if user_answer.upper() == answer.upper():
 		return question("Your answer is right.")
 	else:
 		return question("you answered " + user_answer.upper() +" ....Correct answer is  " + query_dict["correct_answer"].upper())
