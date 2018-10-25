@@ -57,11 +57,11 @@ def display_question():
 
 @ask.intent("answer_intent")
 def display_answer(user_answer):
+	print(type(user_answer))
 	if user_answer.upper() == query_dict["correct_answer"].upper():
 		return question("Your answer is right.")
-
-	print("Correct Answer is Option " + query_dict["correct_answer"])	
-	return question("Correct Answer is Option " + query_dict["correct_answer"])
+	else:
+		return question("you answered " + user_answer.upper() +" ....Correct answer is + " query_dict["correct_answer"].upper())
 
 
 @ask.intent("terminate")
