@@ -26,8 +26,9 @@ def new_ask():
 @ask.intent("question_intent")
 def display_question(qno):
 	qno = int(qno)
+	qno = qno - 1
 
-	if qno > len(questions_list):
+	if qno >= len(questions_list):
 		return question("There are only 5 questions. So select from 1 to 5.")
 
 	questions_list_item = questions_list[qno]
