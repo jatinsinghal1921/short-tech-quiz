@@ -10,6 +10,7 @@ import random
 
 app = Flask(__name__)
 ask = Ask(app, "/alexa")
+app.secret_key = 'any random string’
 
 ### Global Variables
 quizFile = open("quiz.json","r")
@@ -41,22 +42,24 @@ def display_question(qno):
 	option_str = options[0] + "\n\n" + options[1] + "\n\n" +options[2] + "\n\n" +options[3]
 	print(option_str)
 
-	print("Storing Question no in txt file")
-	qno_file = open("qno.txt","w")
-	qno_file.write(str(qno))
-	qno_file.close()
+	session["answer"] = questions_list_item["Answers"]
+	# print("Storing Question no in txt file")
+	# qno_file = open("qno.txt","w")
+	# qno_file.write(str(qno))
+	# qno_file.close()
 
 	return question(query + "\n\n" + option_str)
 
 
 @ask.intent("answer_intent")
 def display_answer(user_answer):
-	print("Reading from qno file.")
-	qno_file = open("qno.txt","r")
-	qno = qno_file.read()
+	# print("Reading from qno file.")
+	# qno_file = open("qno.txt","r")
+	# qno = qno_file.read()
 
-	qno = int(qno)
-	correct_answer = questions_list[qno]["Answers"]
+	# qno = int(qno)
+
+	correct_answer = session["answer"]
 	if user_answer.upper() == correct_answer.upper():
 		return question("Your answer is right.")
 	else:
