@@ -5,13 +5,13 @@ import requests
 import json
 import random
 import os
+import pickle
 
 # --------------------------------------------------------------------------------------------
 # INITIALISATION
 
 app = Flask(__name__)
 ask = Ask(app, "/alexa")
-app.secret_key = os.environ['SECRET_KEY']
 
 ### Global Variables
 quizFile = open("quiz.json","r")
@@ -43,7 +43,9 @@ def display_question(qno):
 	option_str = options[0] + "\n\n" + options[1] + "\n\n" +options[2] + "\n\n" +options[3]
 	print(option_str)
 
-	session["answer"] = questions_list_item["Answers"]
+	f = open("answer.pickle",'wb')
+	pickle.dump(questions_list_item["Answers"],f)
+
 	# print("Storing Question no in txt file")
 	# qno_file = open("qno.txt","w")
 	# qno_file.write(str(qno))
@@ -60,7 +62,10 @@ def display_answer(user_answer):
 
 	# qno = int(qno)
 
-	correct_answer = session["answer"]
+	f = open("answer.pickle",'rb')
+	correct_answer = pickle.load(f)
+	correct_answer = str(correct_answer)
+
 	if user_answer.upper() == correct_answer.upper():
 		return question("Your answer is right.")
 	else:
