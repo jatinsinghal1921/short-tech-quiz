@@ -10,7 +10,7 @@ import random
 
 app = Flask(__name__)
 ask = Ask(app, "/alexa")
-app.secret_key = 'any random string’
+app.secret_key = "any random string"
 
 ### Global Variables
 quizFile = open("quiz.json","r")
