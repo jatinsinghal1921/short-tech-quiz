@@ -4,13 +4,14 @@ from datetime import datetime
 import requests
 import json
 import random
+import os
 
 # --------------------------------------------------------------------------------------------
 # INITIALISATION
 
 app = Flask(__name__)
 ask = Ask(app, "/alexa")
-app.secret_key = "any random string"
+app.secret_key = os.environ['SECRET_KEY']
 
 ### Global Variables
 quizFile = open("quiz.json","r")
