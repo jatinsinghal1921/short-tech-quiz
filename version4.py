@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 from flask_ask import Ask, statement, question
 from datetime import datetime
 import requests
@@ -14,8 +14,7 @@ ask = Ask(app, "/alexa")
 ### Global Variables
 quizFile = open("quiz.json","r")
 questions_list = json.load(quizFile)
-i = 0
-score = 0
+
 
 @ask.launch
 def new_ask():
@@ -25,15 +24,14 @@ def new_ask():
 
 
 @ask.intent("question_intent")
-def display_question():
-	global i
-	index = i
-	query, option_str = fetch_question(index)
-	return question(query + "\n\n" + option_str)
+def display_question(qno):
+	qno = int(qno)
+	qno = qno - 1
 
+	if qno >= len(questions_list):
+		return question("There are only 5 questions. So select from 1 to 5.")
 
-def fetch_question(index):
-	questions_list_item = questions_list[index]
+	questions_list_item = questions_list[qno]
 	print(questions_list_item)
 
 	query = questions_list_item["Question"]
@@ -43,37 +41,31 @@ def fetch_question(index):
 	option_str = options[0] + "\n\n" + options[1] + "\n\n" +options[2] + "\n\n" +options[3]
 	print(option_str)
 
-	return query, option_str
+	print("Storing Question no in txt file")
+	qno_file = open("qno.txt","w")
+	qno_file.write(str(qno))
+	qno_file.close()
+
+	return question(query + "\n\n" + option_str)
 
 
 @ask.intent("answer_intent")
 def display_answer(user_answer):
-	global i
-	global score
-	correct_answer = questions_list[i]["Answers"]
-	
-	reply = ""
-	if user_answer.upper() == correct_answer.upper():
-		reply = "Correct Answer. \n\n"
-		score = score + 1
-	else:
-		reply = "Wrong Answer. \n\n"
+	print("Reading from qno file.")
+	qno_file = open("qno.txt","r")
+	qno = qno_file.read()
 
-	i = i+1
-	if i >= len(questions_list):
-		reply = "Your Score is " + score + "\n\nSee You Later "
-		return statement(reply)
+	qno = int(qno)
+	correct_answer = questions_list[qno]["Answers"]
+	if user_answer.upper() == correct_answer.upper():
+		return question("Your answer is right.")
 	else:
-		query, option_str = fetch_question(i)
-		reply = "Next Question is ... \n\n" + query + "\n\n" + option_str
-		return question(reply)
-	
-		
+		return question("you answered " + user_answer.upper() +" ....Correct answer is  " + correct_answer.upper())
+
+
 @ask.intent("terminate")
 def terminate_quiz():
-	global score
-	reply = "Your Score is " + score
-	return statement(reply + "\n\nSee You Later")
+	return statement("See You Later")
 
 
 @app.route("/", methods=["GET", "POST"])
