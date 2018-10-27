@@ -20,7 +20,7 @@ questions_list = json.load(quizFile)
 @ask.launch
 def new_ask():
     print("Launch invoked")
-    welcome = "Welcome to the quiz Show.\n\nThere are totally 5 questions.\n\nSay 'Go to Question Qno.' to start the quiz. and \n\n Goodbye to terminate the quiz."
+    welcome = "Welcome to the quiz Show.\n\nFollowing are the Quiz rules..\n\nThere are totally 5 questions with each question having 4 options A,B,C and D.\n\nThere is only one correct answer. Select the answer by saying 'Option A/B/C/D' You can terminate the quiz at any time by saying terminate.The score will be displayed at the end of the quiz or on termination."
     return question(welcome)
 
 
