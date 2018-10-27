@@ -99,6 +99,36 @@ def terminate_quiz():
 	return statement(reply + "\n\nSee You Later")
 
 
+@ask.intent("AMAZON.FallbackIntent")
+def fallback():
+	reply = "I didn't understand you.\nTo start quiz say, 'Lets begin'.\nTo terminate say 'terminate'. To answer the question say option Keyword and then A or B or C or D. "
+	return question(reply)
+
+
+@ask.intent("AMAZON.CancelIntent")
+def cancel():
+	reply = "Existing the Quiz"
+	return statement(reply)
+
+
+@ask.intent("AMAZON.StopIntent")
+def fallback():
+	reply = "Existing the Quiz"
+	return question(reply)
+
+
+@ask.intent("AMAZON.HelpIntent")
+def fallback():
+	reply = "I didn't understand you.\nTo start quiz say, 'Lets begin'.\nTo terminate say 'terminate'. To answer the question say option Keyword and then A or B or C or D. "
+	return question(reply)
+
+
+@ask.intent("AMAZON.NavigateHomeIntent")
+def fallback():
+	reply = "Existing the Quiz"
+	return statement(reply)
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
 	print(questions_list[0]["Question"])
