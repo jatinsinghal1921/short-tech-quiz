@@ -95,7 +95,7 @@ def display_answer(user_answer):
 @ask.intent("terminate")
 def terminate_quiz():
 	i, score = read_pickle()
-	reply = "Your Final Score is " + score
+	reply = "Your Final Score is " + str(score)
 	return statement(reply + "\n\nSee You Later")
 
 
