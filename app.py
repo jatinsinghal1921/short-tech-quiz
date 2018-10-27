@@ -61,18 +61,18 @@ def display_answer(user_answer):
 
 	i = i+1
 	if i >= len(questions_list):
-		reply = "Your Score is " + score + "\n\nSee You Later "
+		reply = reply + "Your Final Score is " + score + "\n\nSee You Later "
 		return statement(reply)
 	else:
 		query, option_str = fetch_question(i)
-		reply = "Next Question is ... \n\n" + query + "\n\n" + option_str
+		reply = reply + "Next Question is ... \n\n" + query + "\n\n" + option_str
 		return question(reply)
 	
 		
 @ask.intent("terminate")
 def terminate_quiz():
 	global score
-	reply = "Your Score is " + score
+	reply = "Your Final Score is " + score
 	return statement(reply + "\n\nSee You Later")
 
 
