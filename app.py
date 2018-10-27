@@ -107,14 +107,14 @@ def fallback():
 
 @ask.intent("AMAZON.CancelIntent")
 def cancel():
-	reply = "Existing the Quiz"
+	reply = "Exiting the Quiz"
 	return statement(reply)
 
 
 @ask.intent("AMAZON.StopIntent")
 def fallback():
-	reply = "Existing the Quiz"
-	return question(reply)
+	reply = "Exiting the Quiz"
+	return statement(reply)
 
 
 @ask.intent("AMAZON.HelpIntent")
@@ -125,7 +125,7 @@ def fallback():
 
 @ask.intent("AMAZON.NavigateHomeIntent")
 def fallback():
-	reply = "Existing the Quiz"
+	reply = "Exiting the Quiz"
 	return statement(reply)
 
 
