@@ -50,7 +50,7 @@ def fetch_question(index):
 def display_answer(user_answer):
 	global i
 	global score
-	print("index : " + i)
+	print("index : " + str(i))
 	correct_answer = questions_list[i]["Answers"]
 	
 	reply = ""
