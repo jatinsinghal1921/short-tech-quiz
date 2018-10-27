@@ -83,7 +83,7 @@ def display_answer(user_answer):
 	i = i+1
 
 	if i >= len(questions_list):
-		reply = reply + "Your Final Score is " + score + "\n\nSee You Later "
+		reply = reply + "Your Final Score is " + str(score) + "\n\nSee You Later "
 		return statement(reply)
 	
 	write_pickle(i,score)
